@@ -1,0 +1,425 @@
+
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>e-Huffaz Premium | SMKA Tok Bachok</title>
+<style>
+:root {
+  --navy:#142b4a;
+  --blue:#2457a7;
+  --gold:#d8b568;
+  --bg:#f4f6fa;
+  --text:#243247;
+  --muted:#778398;
+  --white:#ffffff;
+  --border:#e8edf4;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  font-size:15px;
+}
+button { font:inherit; cursor:pointer; }
+.layout { display:flex; min-height:100vh; }
+.sidebar {
+  width:250px;
+  background:var(--navy);
+  color:white;
+  padding:26px 16px;
+  display:flex;
+  flex-direction:column;
+  flex-shrink:0;
+}
+.brand {
+  display:flex; align-items:center; gap:12px;
+  padding:0 10px 28px;
+  border-bottom:1px solid #ffffff20;
+}
+.brand-icon {
+  width:46px;height:46px;border-radius:14px;
+  display:grid;place-items:center;
+  background:#ffffff15;color:var(--gold);
+  font-size:25px;
+}
+.brand h2 { font-size:19px;margin:0 0 5px; }
+.brand small { color:#bdcadd;font-size:12px; }
+.nav-label {
+  color:#a9bad0;font-size:11px;
+  letter-spacing:1.5px;font-weight:bold;
+  padding:25px 12px 10px;
+}
+.nav-btn {
+  width:100%;border:0;background:transparent;
+  color:#d5deeb;text-align:left;
+  padding:13px 14px;border-radius:10px;
+  margin:3px 0;display:flex;gap:12px;
+  align-items:center;font-size:14px;
+}
+.nav-btn:hover,.nav-btn.active {
+  background:#ffffff17;color:white;
+}
+.nav-btn.active { box-shadow:inset 3px 0 var(--gold); }
+.nav-icon { width:22px;text-align:center;font-size:17px; }
+.sidebar-bottom {
+  margin-top:auto;padding:18px 10px 0;
+  color:#bdcadd;font-size:12px;line-height:1.8;
+}
+.main { flex:1;min-width:0; }
+.topbar {
+  height:76px;background:white;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 32px;gap:16px;
+}
+.top-title { font-weight:bold;font-size:16px; }
+.top-sub { color:var(--muted);font-size:12px;margin-top:4px; }
+.top-right { display:flex;align-items:center;gap:12px; }
+.status {
+  background:#edf7f0;color:#267346;
+  padding:8px 11px;border-radius:20px;font-size:12px;
+}
+.avatar {
+  background:#e8edf8;color:var(--navy);
+  width:38px;height:38px;border-radius:50%;
+  display:grid;place-items:center;font-weight:bold;
+}
+.content { padding:30px 32px;max-width:1500px;margin:auto; }
+.welcome {
+  background:linear-gradient(115deg,#142b4a,#28558d);
+  color:white;padding:30px;border-radius:18px;
+  position:relative;overflow:hidden;margin-bottom:25px;
+}
+.welcome:after {
+  content:"۞";position:absolute;right:25px;top:-40px;
+  font-size:180px;color:#ffffff0b;
+}
+.eyebrow {
+  color:#e3c780;text-transform:uppercase;
+  letter-spacing:1.8px;font-size:11px;font-weight:bold;
+}
+.welcome h1 { font-size:29px;margin:12px 0 9px; }
+.welcome p { color:#d9e3f1;margin:0;line-height:1.7;max-width:650px; }
+.section-head {
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;margin:26px 0 15px;
+}
+.section-head h2 { margin:0;font-size:18px; }
+.muted { color:var(--muted);font-size:13px; }
+.stats {
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:16px;
+}
+.stat {
+  background:white;border:1px solid var(--border);
+  border-radius:14px;padding:20px;
+}
+.stat-top { display:flex;justify-content:space-between;align-items:center; }
+.stat-icon {
+  width:40px;height:40px;border-radius:12px;
+  background:#edf2fb;display:grid;place-items:center;font-size:20px;
+}
+.stat-label { color:var(--muted);font-size:13px; }
+.stat-number { font-size:29px;font-weight:bold;margin:17px 0 7px; }
+.stat-foot { font-size:12px;color:var(--muted); }
+.grid-two {
+  display:grid;grid-template-columns:minmax(0,1.5fr) minmax(270px,1fr);
+  gap:18px;margin-top:22px;
+}
+.panel {
+  background:white;border:1px solid var(--border);
+  border-radius:14px;padding:22px;min-width:0;
+}
+.panel h3 { margin:0;font-size:16px; }
+.panel-desc { color:var(--muted);font-size:12px;margin-top:7px; }
+.quick-grid {
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;margin-top:20px;
+}
+.quick-btn {
+  border:1px solid var(--border);border-radius:12px;
+  background:#fff;padding:16px;text-align:left;color:var(--text);
+}
+.quick-btn:hover { border-color:#b8c9e5;background:#f8faff; }
+.quick-icon { font-size:22px;margin-bottom:12px; }
+.quick-btn strong { display:block;font-size:14px;margin-bottom:6px; }
+.quick-btn span { font-size:12px;color:var(--muted);line-height:1.5; }
+.record-list { margin-top:18px; }
+.record {
+  padding:15px 0;border-bottom:1px solid var(--border);
+  display:flex;justify-content:space-between;gap:12px;
+}
+.record:last-child { border-bottom:0; }
+.record strong { font-size:13px; }
+.record p { margin:6px 0 0;color:var(--muted);font-size:12px; }
+.tag {
+  align-self:center;background:#f0f3f8;color:#58677c;
+  padding:6px 9px;border-radius:8px;font-size:11px;white-space:nowrap;
+}
+.page { display:none; }
+.page.active { display:block; }
+.placeholder {
+  margin-top:18px;background:#fff;border:1px solid var(--border);
+  border-radius:14px;padding:30px;
+}
+.placeholder h2 { margin-top:0; }
+.notice {
+  background:#fff8e8;border:1px solid #f0dfb3;
+  border-radius:10px;padding:13px 15px;
+  font-size:13px;line-height:1.7;color:#795c21;
+}
+.footer { text-align:center;color:var(--muted);font-size:12px;padding:30px 10px 10px; }
+.mobile-menu { display:none;border:0;background:none;font-size:24px;color:var(--navy); }
+@media(max-width:1000px) {
+  .sidebar { width:220px; }
+  .stats { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .grid-two { grid-template-columns:1fr; }
+}
+@media(max-width:680px) {
+  .layout { display:block; }
+  .sidebar {
+    display:none;position:fixed;z-index:10;inset:0 auto 0 0;
+    width:270px;box-shadow:10px 0 30px #0002;
+  }
+  .sidebar.open { display:flex; }
+  .topbar { height:68px;padding:0 16px; }
+  .mobile-menu { display:block; }
+  .top-title { font-size:14px; }
+  .top-sub,.status { display:none; }
+  .content { padding:20px 15px; }
+  .welcome { padding:23px 20px; }
+  .welcome h1 { font-size:24px; }
+  .stats { gap:10px; }
+  .stat { padding:14px; }
+  .stat-number { font-size:25px; }
+  .section-head { align-items:flex-start;flex-direction:column; }
+  .panel { padding:17px; }
+  .quick-grid { gap:9px; }
+}
+</style>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-icon">۞</div>
+      <div>
+        <h2>e-Huffaz</h2>
+        <small>PREMIUM SYSTEM</small>
+      </div>
+    </div>
+
+    <div class="nav-label">MENU UTAMA</div>
+    <button class="nav-btn active" data-page="dashboard"><span class="nav-icon">⌂</span> Dashboard</button>
+    <button class="nav-btn" data-page="tasmi"><span class="nav-icon">📖</span> Rekod Tasmi'</button>
+    <button class="nav-btn" data-page="murajaah"><span class="nav-icon">↻</span> Rekod Murajaah</button>
+    <button class="nav-btn" data-page="skip"><span class="nav-icon">◷</span> Rekod Skip</button>
+
+    <div class="nav-label">PENGURUSAN</div>
+    <button class="nav-btn" data-page="murid"><span class="nav-icon">♙</span> Murid & Halaqah</button>
+    <button class="nav-btn" data-page="laporan"><span class="nav-icon">▤</span> Laporan</button>
+    <button class="nav-btn" data-page="admin"><span class="nav-icon">⚙</span> Pentadbiran</button>
+
+    <div class="sidebar-bottom">
+      <strong>SMKA Tok Bachok</strong><br>
+      Sistem Pengurusan Hafazan<br>
+      <span style="color:#e3c780">Versi 1.0 • Paparan awal</span>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div style="display:flex;align-items:center;gap:12px">
+        <button class="mobile-menu" id="menuToggle" aria-label="Buka menu">☰</button>
+        <div>
+          <div class="top-title" id="topTitle">Dashboard</div>
+          <div class="top-sub">Sistem Pengurusan Hafazan SMKA Tok Bachok</div>
+        </div>
+      </div>
+      <div class="top-right">
+        <span class="status">● Paparan demo</span>
+        <div class="avatar">EH</div>
+      </div>
+    </header>
+
+    <div class="content">
+      <section class="page active" id="page-dashboard">
+        <div class="welcome">
+          <div class="eyebrow">Pengurusan Huffaz • SMKATB</div>
+          <h1>Selamat Datang ke e-Huffaz</h1>
+          <p>Pengurusan rekod tasmi', murajaah dan perkembangan hafazan dalam satu platform yang tersusun.</p>
+        </div>
+
+        <div class="section-head">
+          <div>
+            <h2>Ringkasan Sistem</h2>
+            <div class="muted" style="margin-top:6px">Statistik akan dipaparkan selepas pangkalan data disambungkan.</div>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-top"><span class="stat-label">Jumlah Murid</span><span class="stat-icon">♙</span></div>
+            <div class="stat-number">—</div>
+            <div class="stat-foot">Menunggu sambungan data</div>
+          </div>
+          <div class="stat">
+            <div class="stat-top"><span class="stat-label">Rekod Tasmi'</span><span class="stat-icon">📖</span></div>
+            <div class="stat-number">—</div>
+            <div class="stat-foot">Menunggu sambungan data</div>
+          </div>
+          <div class="stat">
+            <div class="stat-top"><span class="stat-label">Rekod Murajaah</span><span class="stat-icon">↻</span></div>
+            <div class="stat-number">—</div>
+            <div class="stat-foot">Menunggu sambungan data</div>
+          </div>
+          <div class="stat">
+            <div class="stat-top"><span class="stat-label">Rekod Skip</span><span class="stat-icon">◷</span></div>
+            <div class="stat-number">—</div>
+            <div class="stat-foot">Menunggu sambungan data</div>
+          </div>
+        </div>
+
+        <div class="grid-two">
+          <div class="panel">
+            <h3>Akses Pantas</h3>
+            <div class="panel-desc">Pilih modul yang ingin dibuka.</div>
+            <div class="quick-grid">
+              <button class="quick-btn" data-go="tasmi">
+                <div class="quick-icon">📖</div>
+                <strong>Rekod Tasmi'</strong>
+                <span>Pengisian hafazan baharu</span>
+              </button>
+              <button class="quick-btn" data-go="murajaah">
+                <div class="quick-icon">↻</div>
+                <strong>Rekod Murajaah</strong>
+                <span>Pengisian hafazan ulangan</span>
+              </button>
+              <button class="quick-btn" data-go="skip">
+                <div class="quick-icon">◷</div>
+                <strong>Rekod Skip</strong>
+                <span>Pengurusan rekod skip</span>
+              </button>
+              <button class="quick-btn" data-go="laporan">
+                <div class="quick-icon">▤</div>
+                <strong>Laporan Hafazan</strong>
+                <span>Semakan pencapaian murid</span>
+              </button>
+            </div>
+          </div>
+          <div class="panel">
+            <h3>Status Pembangunan</h3>
+            <div class="panel-desc">Komponen yang sedang disediakan.</div>
+            <div class="record-list">
+              <div class="record">
+                <div><strong>Antara muka premium</strong><p>Dashboard dan menu utama</p></div>
+                <span class="tag">Sedia</span>
+              </div>
+              <div class="record">
+                <div><strong>Pangkalan data</strong><p>Google Sheets</p></div>
+                <span class="tag">Belum sambung</span>
+              </div>
+              <div class="record">
+                <div><strong>Log masuk pengguna</strong><p>Akses guru dan pentadbir</p></div>
+                <span class="tag">Belum dibina</span>
+              </div>
+              <div class="record">
+                <div><strong>Laporan automatik</strong><p>Ringkasan dan pencapaian</p></div>
+                <span class="tag">Belum dibina</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer">e-Huffaz Premium • SMKA Tok Bachok</div>
+      </section>
+
+      <section class="page" id="page-tasmi">
+        <div class="placeholder">
+          <h2>📖 Rekod Tasmi'</h2>
+          <p>Modul untuk merekod hafazan baharu murid.</p>
+          <div class="notice">Borang tasmi' akan dibina selepas sambungan Google Sheets dan Google Apps Script disediakan. Rekod belum disimpan dalam versi ini.</div>
+        </div>
+      </section>
+
+      <section class="page" id="page-murajaah">
+        <div class="placeholder">
+          <h2>↻ Rekod Murajaah</h2>
+          <p>Modul untuk merekod hafazan ulangan murid.</p>
+          <div class="notice">Borang murajaah akan disambungkan kepada pangkalan data pada peringkat seterusnya.</div>
+        </div>
+      </section>
+
+      <section class="page" id="page-skip">
+        <div class="placeholder">
+          <h2>◷ Rekod Skip</h2>
+          <p>Modul rekod skip dan pengurusan bayaran berkaitan.</p>
+          <div class="notice">Fungsi pengiraan dan rekod bayaran belum diaktifkan.</div>
+        </div>
+      </section>
+
+      <section class="page" id="page-murid">
+        <div class="placeholder">
+          <h2>♙ Murid & Halaqah</h2>
+          <p>Pengurusan senarai murid, guru dan kumpulan halaqah.</p>
+          <div class="notice">Senarai murid sebenar akan dipaparkan selepas pangkalan data disambungkan.</div>
+        </div>
+      </section>
+
+      <section class="page" id="page-laporan">
+        <div class="placeholder">
+          <h2>▤ Laporan Hafazan</h2>
+          <p>Ringkasan tasmi', murajaah, skip dan pencapaian sasaran.</p>
+          <div class="notice">Laporan automatik memerlukan data sebenar dan fungsi pemprosesan di bahagian pelayan.</div>
+        </div>
+      </section>
+
+      <section class="page" id="page-admin">
+        <div class="placeholder">
+          <h2>⚙ Pentadbiran</h2>
+          <p>Pengurusan pengguna, guru, sasaran hafazan dan tetapan sistem.</p>
+          <div class="notice">Halaman ini belum dilindungi dengan log masuk. Jangan gunakan untuk mengurus data sebenar sehingga pengesahan akses dibina.</div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<script>
+const titles = {
+  dashboard:"Dashboard",
+  tasmi:"Rekod Tasmi'",
+  murajaah:"Rekod Murajaah",
+  skip:"Rekod Skip",
+  murid:"Murid & Halaqah",
+  laporan:"Laporan Hafazan",
+  admin:"Pentadbiran"
+};
+
+function showPage(name) {
+  if (!titles[name]) return;
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.toggle("active", page.id === "page-" + name);
+  });
+  document.querySelectorAll(".nav-btn").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.page === name);
+  });
+  document.getElementById("topTitle").textContent = titles[name];
+  document.getElementById("sidebar").classList.remove("open");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+document.querySelectorAll("[data-page]").forEach(btn => {
+  btn.addEventListener("click", () => showPage(btn.dataset.page));
+});
+document.querySelectorAll("[data-go]").forEach(btn => {
+  btn.addEventListener("click", () => showPage(btn.dataset.go));
+});
+document.getElementById("menuToggle").addEventListener("click", () => {
+  document.getElementById("sidebar").classList.toggle("open");
+});
+</script>
+</body>
+</html>
